@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Readiness Audit - Interactive Spreadsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f5f5f5;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            background: #f5f5f5;
+            border: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .tab:hover {
+            background: #e0e0e0;
+        }
+
+        .tab.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .question-block {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .question-block h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .question-text {
+            color: #555;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .why-matters {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        input[type="number"], input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus, input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .formula-display {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            border-left: 4px solid #4caf50;
+        }
+
+        .formula-display strong {
+            color: #2e7d32;
+            font-size: 1.1em;
+        }
+
+        .dashboard {
+            text-align: center;
+        }
+
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .dashboard-card h3 {
+            font-size: 1em;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .dashboard-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .recommendation {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .recommendation h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .recommendation .result {
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .result.low-value {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            color: #856404;
+        }
+
+        .result.perfect-lead {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            color: #155724;
+        }
+
+        .result.medium-value {
+            background: #cce5ff;
+            border-left: 4px solid #007bff;
+            color: #004085;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .radio-option input[type="radio"] {
+            width: auto;
+        }
+
+        .complexity-score {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .complexity-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .complexity-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .complexity-item .indicator {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        @media print {
+            .tabs {
+                display: none;
+            }
+            .section {
+                display: block !important;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 AI Readiness Audit</h1>
+            <p>Calculate Your Automation ROI & Strategic Readiness</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('dashboard')">📊 Dashboard</button>
+            <button class="tab" onclick="showTab('section1')">💰 Cost Analysis</button>
+            <button class="tab" onclick="showTab('section2')">⚙️ Complexity</button>
+            <button class="tab" onclick="showTab('section3')">🚦 Readiness</button>
+        </div>
+
+        <div class="content">
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="section active dashboard">
+                <div class="section-header">
+                    <h2>Your AI Readiness Score</h2>
+                    <p>Real-time analysis of your automation opportunity</p>
+                </div>
+
+                <div class="dashboard-cards">
+                    <div class="dashboard-card">
+                        <h3>Monthly Waste</h3>
+                        <div class="value" id="monthlyWaste">$0</div>
+                        <p>Lost productivity per month</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Annual Waste</h3>
+                        <div class="value" id="annualWaste">$0</div>
+                        <p>Total yearly cost</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Complexity Score</h3>
+                        <div class="value" id="complexityScore">-</div>
+                        <p>Automation difficulty</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Readiness Level</h3>
+                        <div class="value" id="readinessScore">-</div>
+                        <p>Implementation ready</p>
+                    </div>
+                </div>
+
+                <div class="complexity-score">
+                    <div class="complexity-item">
+                        <h4>Apps Involved</h4>
+                        <div class="indicator" id="appsIndicator">-</div>
+                        <div id="appsStatus">-</div>
+                    </div>
+                    <div class="complexity-item">
+                        <h4>AI Required</h4>
+                        <div class="indicator" id="aiIndicator">-</div>
+                        <div id="aiStatus">-</div>
+                    </div>
+                    <div class="complexity-item">
+                        <h4>Data Type</h4>
+                        <div class="indicator" id="dataIndicator">-</div>
+                        <div id="dataStatus">-</div>
+                    </div>
+                </div>
+
+                <div class="recommendation">
+                    <h3>💡 Recommendation</h3>
+                    <div class="result" id="recommendation">
+                        Complete the audit questions to see your personalized recommendation.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: Cost Analysis -->
+            <div id="section1" class="section">
+                <div class="section-header">
+                    <h2>📊 Section 1: The "Bleeding Neck" (ROI Calculator)</h2>
+                    <p>Prove you are losing at least $50k/year on this problem</p>
+                </div>
+
+                <div class="question-block">
+                    <h3>Q1. Task Frequency & Volume</h3>
+                    <p class="question-text">"How many times per month is this specific process performed across the entire company?"</p>
+                    <div class="why-matters">
+                        <strong>Why this matters:</strong> Automation thrives on volume. Low volume = low ROI. High volume = high ROI.
+                    </div>
+                    <input type="number" id="q1" placeholder="e.g., 500" oninput="calculate()">
+                </div>
+
+                <div class="question-block">
+                    <h3>Q2. Human Time per Instance</h3>
+                    <p class="question-text">"On average, how many minutes does it take a human to complete one instance of this task (including switching tabs, logging in, thinking time)?"</p>
+                    <div class="why-matters">
+                        <strong>Why this matters:</strong> Executives usually underestimate this. 5 minutes x 1000 times a month = 83 hours lost.
+                    </div>
+                    <input type="number" id="q2" placeholder="e.g., 15" oninput="calculate()">
+                </div>
+
+                <div class="question-block">
+                    <h3>Q3. Fully Burdened Hourly Cost</h3>
+                    <p class="question-text">"What is the average hourly cost of the employee doing this task? (Salary + Overhead usually ≈ $40-$80/hr)."</p>
+                    <div class="why-matters">
+                        <strong>Why this matters:</strong> This is the anchor.
+                    </div>
+                    <input type="number" id="q3" placeholder="e.g., 60" oninput="calculate()">
+                </div>
+
+                <div class="formula-display">
+                    <strong>Formula:</strong> (Q1 × Q2 ÷ 60) × Q3 = Monthly Waste<br>
+                    <strong>Your Result:</strong> <span id="monthlyWasteCalc">Fill in the fields above</span>
+                </div>
+
+                <div class="question-block">
+                    <h3>Q4. The "Cost of Error"</h3>
+                    <p class="question-text">"What is the estimated financial impact of a single human error in this process (e.g., lost lead, refund, compliance fine, reputation damage)?"</p>
+                    <div class="why-matters">
+                        <strong>Why this matters:</strong> This is the "fear" factor. If one missed email costs a $5k deal, your automation pays for itself instantly.
+                    </div>
+                    <input type="number" id="q4" placeholder="e.g., 5000" oninput="calculate()">
+                </div>
+            </div>
+
+            <!-- Section 2: Complexity -->
+            <div id="section2" class="section">
+                <div class="section-header">
+                    <h2>⚙️ Section 2: Complexity (Why Zapier Won't Work)</h2>
+                    <p>Prove that this is too hard for their internal team or a cheap tool</p>
+                </div>
+
+                <div class="question-block">
+                    <h3>Q5. The "App Stack" Count</h3>
+                    <p class="question-text">"List all the software platforms involved in this workflow (e.g., Outlook, Salesforce, Google Sheets, Slack, PDF Parser)."</p>
+                    <div class="why-matters">
+                        <strong>Qualification:</strong><br>
+                        • 1-2 Apps: Too simple (Recommend Zapier/Make DIY).<br>
+                        • 3+ Apps: Perfect Client. This requires n8n data transformation.
+                    </div>
+                    <textarea id="q5" placeholder="List all apps separated by commas (e.g., Outlook, Salesforce, Google Sheets)" oninput="calculate()"></textarea>
+                    <div style="margin-top: 10px; color: #667eea; font-weight: bold;" id="appCount"></div>
+                </div>
+
+                <div class="question-block">
+                    <h3>Q6. Cognitive Load (The AI Trigger)</h3>
+                    <p class="question-text">"Does this task require reading unstructured text (emails, PDFs) and making a decision/judgment?"</p>
+                    <div class="why-matters">
+                        <strong>Qualification:</strong><br>
+                        • No (Just copy-paste): Simple automation.<br>
+                        • Yes: This requires AI Agents (LLMs). This justifies your premium pricing.
+                    </div>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q6yes" name="q6" value="yes" onchange="calculate()">
+                            <label for="q6yes">Yes - Requires AI/Decision Making</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q6no" name="q6" value="no" onchange="calculate()">
+                            <label for="q6no">No - Simple Copy/Paste</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <h3>Q7. Data Stability</h3>
+                    <p class="question-text">"Is the data for this process structured (databases/Excel) or unstructured (emails/phone calls/PDFs)?"</p>
+                    <div class="why-matters">
+                        <strong>Why this matters:</strong> Unstructured data is the hardest problem to solve and the highest value service you offer.
+                    </div>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q7unstructured" name="q7" value="unstructured" onchange="calculate()">
+                            <label for="q7unstructured">Unstructured (emails, PDFs, calls)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q7structured" name="q7" value="structured" onchange="calculate()">
+                            <label for="q7structured">Structured (databases, Excel)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Readiness -->
+            <div id="section3" class="section">
+                <div class="section-header">
+                    <h2>🚦 Section 3: Readiness (The "Nightmare Client" Filter)</h2>
+                    <p>Ensure they can actually buy and won't drag out the project</p>
+                </div>
+
+                <div class="question-block">
+                    <h3>Q8. Process Documentation</h3>
+                    <p class="question-text">"Is there a current Standard Operating Procedure (SOP) or Loom video documenting this process step-by-step?"</p>
+                    <div class="why-matters">
+                        <strong>The Filter:</strong><br>
+                        • Yes: Ready to build.<br>
+                        • No: You must sell them a "Discovery & Mapping Workshop" ($2k-$5k) before building the agent.
+                    </div>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q8yes" name="q8" value="yes" onchange="calculate()">
+                            <label for="q8yes">Yes - We have documentation</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q8no" name="q8" value="no" onchange="calculate()">
+                            <label for="q8no">No - Process not documented</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <h3>Q9. Authorization Level</h3>
+                    <p class="question-text">"Do you own the budget and admin permissions for the software tools involved?"</p>
+                    <div class="why-matters">
+                        <strong>Why this matters:</strong> If they say "No, IT controls everything," you are entering a slow procurement cycle (Red Flag).
+                    </div>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q9yes" name="q9" value="yes" onchange="calculate()">
+                            <label for="q9yes">Yes - I have budget & permissions</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q9no" name="q9" value="no" onchange="calculate()">
+                            <label for="q9no">No - Need IT approval</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(tabId).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function calculate() {
+            // Get values
+            const q1 = parseFloat(document.getElementById('q1').value) || 0;
+            const q2 = parseFloat(document.getElementById('q2').value) || 0;
+            const q3 = parseFloat(document.getElementById('q3').value) || 0;
+            const q4 = parseFloat(document.getElementById('q4').value) || 0;
+
+            // Calculate monthly and annual waste
+            const monthlyWaste = (q1 * q2 / 60) * q3;
+            const annualWaste = monthlyWaste * 12;
+
+            // Update dashboard
+            document.getElementById('monthlyWaste').textContent = '$' + monthlyWaste.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById('annualWaste').textContent = '$' + annualWaste.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById('monthlyWasteCalc').textContent = `$${monthlyWaste.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} per month`;
+
+            // Q5 - App count
+            const q5 = document.getElementById('q5').value;
+            const appList = q5.split(',').filter(app => app.trim() !== '');
+            const appCount = appList.length;
+
+            if (appCount > 0) {
+                document.getElementById('appCount').textContent = `${appCount} apps detected`;
+                document.getElementById('appsIndicator').textContent = appCount;
+
+                if (appCount <= 2) {
+                    document.getElementById('appsStatus').textContent = 'Simple';
+                } else {
+                    document.getElementById('appsStatus').textContent = 'Complex';
+                }
+            } else {
+                document.getElementById('appCount').textContent = '';
+                document.getElementById('appsIndicator').textContent = '-';
+                document.getElementById('appsStatus').textContent = '-';
+            }
+
+            // Q6 - Cognitive load
+            const q6 = document.querySelector('input[name="q6"]:checked');
+            const requiresAI = q6 ? q6.value === 'yes' : null;
+
+            if (requiresAI !== null) {
+                document.getElementById('aiIndicator').textContent = requiresAI ? '🤖' : '✓';
+                document.getElementById('aiStatus').textContent = requiresAI ? 'AI Needed' : 'Simple';
+            } else {
+                document.getElementById('aiIndicator').textContent = '-';
+                document.getElementById('aiStatus').textContent = '-';
+            }
+
+            // Q7 - Data type
+            const q7 = document.querySelector('input[name="q7"]:checked');
+            const dataType = q7 ? q7.value : null;
+
+            if (dataType) {
+                document.getElementById('dataIndicator').textContent = dataType === 'unstructured' ? '📄' : '📊';
+                document.getElementById('dataStatus').textContent = dataType === 'unstructured' ? 'Unstructured' : 'Structured';
+            } else {
+                document.getElementById('dataIndicator').textContent = '-';
+                document.getElementById('dataStatus').textContent = '-';
+            }
+
+            // Q8 & Q9 - Readiness
+            const q8 = document.querySelector('input[name="q8"]:checked');
+            const q9 = document.querySelector('input[name="q9"]:checked');
+
+            const hasDocumentation = q8 ? q8.value === 'yes' : null;
+            const hasAuthorization = q9 ? q9.value === 'yes' : null;
+
+            // Calculate complexity score
+            let complexityScore = '-';
+            if (appCount > 0 || requiresAI !== null || dataType !== null) {
+                let score = 0;
+                if (appCount >= 3) score++;
+                if (requiresAI) score++;
+                if (dataType === 'unstructured') score++;
+
+                if (score === 0) complexityScore = 'Low';
+                else if (score === 1) complexityScore = 'Medium';
+                else if (score === 2) complexityScore = 'High';
+                else complexityScore = 'Expert';
+            }
+
+            document.getElementById('complexityScore').textContent = complexityScore;
+
+            // Calculate readiness score
+            let readinessScore = '-';
+            if (hasDocumentation !== null && hasAuthorization !== null) {
+                if (hasDocumentation && hasAuthorization) {
+                    readinessScore = '✓ Ready';
+                } else if (hasDocumentation || hasAuthorization) {
+                    readinessScore = '⚠️ Partial';
+                } else {
+                    readinessScore = '✗ Not Ready';
+                }
+            }
+
+            document.getElementById('readinessScore').textContent = readinessScore;
+
+            // Generate recommendation
+            generateRecommendation(annualWaste, requiresAI, appCount, dataType, hasDocumentation, hasAuthorization);
+        }
+
+        function generateRecommendation(annualWaste, requiresAI, appCount, dataType, hasDocumentation, hasAuthorization) {
+            const recommendationDiv = document.getElementById('recommendation');
+
+            // Check if we have enough data
+            if (annualWaste === 0 && requiresAI === null && appCount === 0) {
+                recommendationDiv.className = 'result';
+                recommendationDiv.innerHTML = 'Complete the audit questions to see your personalized recommendation.';
+                return;
+            }
+
+            // Perfect Lead (High Value + Complex)
+            if (annualWaste >= 40000 && requiresAI) {
+                recommendationDiv.className = 'result perfect-lead';
+                recommendationDiv.innerHTML = `
+                    <strong>🎯 URGENT: Perfect Fit for AI Agent Automation</strong><br><br>
+                    You are losing <strong>$${(annualWaste/12).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}/month</strong> (${(annualWaste).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} annually) on this process.<br><br>
+                    This task requires decision-making and AI capabilities, which makes it a high-value automation opportunity.<br><br>
+                    ${!hasDocumentation ? '<strong>⚠️ Action Required:</strong> You need a "Discovery & Mapping Workshop" ($2k-$5k) before building the agent.<br><br>' : ''}
+                    ${!hasAuthorization ? '<strong>⚠️ Warning:</strong> IT approval required may slow implementation.<br><br>' : ''}
+                    <strong>Next Step:</strong> Book your Strategy Call to discuss implementing an AI Agent solution.
+                `;
+            }
+            // Low Value
+            else if (annualWaste < 10000) {
+                recommendationDiv.className = 'result low-value';
+                recommendationDiv.innerHTML = `
+                    <strong>💡 Recommendation: DIY Solution</strong><br><br>
+                    Your annual waste is <strong>$${annualWaste.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong>, which may not justify a custom automation investment.<br><br>
+                    ${appCount <= 2 ? 'With only ' + appCount + ' apps involved, ' : ''}Consider using tools like:<br>
+                    • ChatGPT for manual assistance<br>
+                    • Zapier or Make.com for simple automation<br>
+                    • Internal process optimization<br><br>
+                    A custom AI agent solution typically makes sense for $40k+ annual waste.
+                `;
+            }
+            // Medium Value
+            else {
+                recommendationDiv.className = 'result medium-value';
+                recommendationDiv.innerHTML = `
+                    <strong>💼 Good Automation Candidate</strong><br><br>
+                    You are losing <strong>$${(annualWaste/12).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}/month</strong> ($${annualWaste.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} annually).<br><br>
+                    ${appCount >= 3 ? 'With ' + appCount + ' apps involved, this requires professional integration.<br><br>' : ''}
+                    ${requiresAI ? 'This task requires AI decision-making capabilities.<br><br>' : 'This could be automated with workflow tools or AI assistance.<br><br>'}
+                    ${dataType === 'unstructured' ? 'Unstructured data adds complexity and value to automation.<br><br>' : ''}
+                    ${!hasDocumentation ? '<strong>⚠️ Next Step:</strong> Consider a "Discovery & Mapping Workshop" to document your process.<br><br>' : ''}
+                    ${!hasAuthorization ? '<strong>⚠️ Note:</strong> You\'ll need IT/budget approval before proceeding.<br><br>' : ''}
+                    <strong>Recommendation:</strong> ${annualWaste >= 25000 ? 'Schedule a consultation to discuss custom automation.' : 'Consider professional automation tools or a small-scale pilot project.'}
+                `;
+            }
+        }
+
+        // Initialize calculations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculate();
+        });
+    </script>
+</body>
+</html>

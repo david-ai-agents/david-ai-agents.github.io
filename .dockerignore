@@ -1,0 +1,10 @@
+# Ignore markdown files
+*.md
+
+# Ignore git
+.git
+.gitignore
+
+# Ignore docker files themselves
+Dockerfile
+.dockerignore
