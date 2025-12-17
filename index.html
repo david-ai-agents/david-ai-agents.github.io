@@ -136,6 +136,17 @@
             transition: border-color 0.3s;
         }
 
+        /* Remove spinner arrows from number inputs */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
         input[type="number"]:focus, input[type="text"]:focus, textarea:focus, select:focus {
             outline: none;
             border-color: #667eea;
@@ -532,8 +543,8 @@
             const q3 = parseFloat(document.getElementById('q3').value) || 0;
             const q4 = parseFloat(document.getElementById('q4').value) || 0;
 
-            // Calculate monthly and annual waste
-            const monthlyWaste = (q1 * q2 / 60) * q3;
+            // Calculate monthly and annual waste (including cost of error)
+            const monthlyWaste = (q1 * q2 / 60) * q3 + q4;
             const annualWaste = monthlyWaste * 12;
 
             // Update dashboard
