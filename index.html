@@ -354,8 +354,8 @@
             <!-- Section 1: Cost Analysis -->
             <div id="section1" class="section">
                 <div class="section-header">
-                    <h2>📊 Section 1: The "Bleeding Neck" (ROI Calculator)</h2>
-                    <p>Prove you are losing at least $50k/year on this problem</p>
+                    <h2>📊 Section 1: ROI Calculator</h2>
+                    <p>Calculate the financial impact of your current process</p>
                 </div>
 
                 <div class="question-block">
@@ -403,8 +403,8 @@
             <!-- Section 2: Complexity -->
             <div id="section2" class="section">
                 <div class="section-header">
-                    <h2>⚙️ Section 2: Complexity (Why Zapier Won't Work)</h2>
-                    <p>Prove that this is too hard for their internal team or a cheap tool</p>
+                    <h2>⚙️ Section 2: Complexity</h2>
+                    <p>Check how complex the process is</p>
                 </div>
 
                 <div class="question-block">
@@ -412,8 +412,8 @@
                     <p class="question-text">"List all the software platforms involved in this workflow (e.g., Outlook, Salesforce, Google Sheets, Slack, PDF Parser)."</p>
                     <div class="why-matters">
                         <strong>Qualification:</strong><br>
-                        • 1-2 Apps: Too simple (Recommend Zapier/Make DIY).<br>
-                        • 3+ Apps: Perfect Client. This requires n8n data transformation.
+                        • 1-2 Apps: Simple and fast.<br>
+                        • 3+ Apps: Quite complex
                     </div>
                     <textarea id="q5" placeholder="List all apps separated by commas (e.g., Outlook, Salesforce, Google Sheets)" oninput="calculate()"></textarea>
                     <div style="margin-top: 10px; color: #667eea; font-weight: bold;" id="appCount"></div>
@@ -425,7 +425,7 @@
                     <div class="why-matters">
                         <strong>Qualification:</strong><br>
                         • No (Just copy-paste): Simple automation.<br>
-                        • Yes: This requires AI Agents (LLMs). This justifies your premium pricing.
+                        • Yes: This requires AI Agents (LLMs). 
                     </div>
                     <div class="radio-group">
                         <div class="radio-option">
@@ -443,7 +443,7 @@
                     <h3>Q7. Data Stability</h3>
                     <p class="question-text">"Is the data for this process structured (databases/Excel) or unstructured (emails/phone calls/PDFs)?"</p>
                     <div class="why-matters">
-                        <strong>Why this matters:</strong> Unstructured data is the hardest problem to solve and the highest value service you offer.
+                        <strong>Why this matters:</strong> Unstructured data is the hardest problem to solve.
                     </div>
                     <div class="radio-group">
                         <div class="radio-option">
@@ -461,8 +461,8 @@
             <!-- Section 3: Readiness -->
             <div id="section3" class="section">
                 <div class="section-header">
-                    <h2>🚦 Section 3: Readiness (The "Nightmare Client" Filter)</h2>
-                    <p>Ensure they can actually buy and won't drag out the project</p>
+                    <h2>🚦 Section 3: Readiness</h2>
+                    <p>How fast can you start the project</p>
                 </div>
 
                 <div class="question-block">
@@ -471,7 +471,7 @@
                     <div class="why-matters">
                         <strong>The Filter:</strong><br>
                         • Yes: Ready to build.<br>
-                        • No: You must sell them a "Discovery & Mapping Workshop" ($2k-$5k) before building the agent.
+                        • No: You might need a "Discovery & Mapping Workshop" ($2k-$5k) before building the solution.
                     </div>
                     <div class="radio-group">
                         <div class="radio-option">
@@ -484,24 +484,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="question-block">
-                    <h3>Q9. Authorization Level</h3>
-                    <p class="question-text">"Do you own the budget and admin permissions for the software tools involved?"</p>
-                    <div class="why-matters">
-                        <strong>Why this matters:</strong> If they say "No, IT controls everything," you are entering a slow procurement cycle (Red Flag).
-                    </div>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="q9yes" name="q9" value="yes" onchange="calculate()">
-                            <label for="q9yes">Yes - I have budget & permissions</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="q9no" name="q9" value="no" onchange="calculate()">
-                            <label for="q9no">No - Need IT approval</label>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
