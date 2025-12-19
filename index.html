@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Readiness Audit - Interactive Spreadsheet</title>
+    <link rel="icon" type="image/png" href="assets/Logo_Favicon.png">
     <style>
         * {
             margin: 0;
@@ -13,7 +14,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1FC7C7 0%, #2B7FE8 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -28,10 +29,16 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1FC7C7 0%, #2B7FE8 100%);
             color: white;
             padding: 30px;
             text-align: center;
+        }
+
+        .header .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 20px;
         }
 
         .header h1 {
@@ -44,33 +51,34 @@
             opacity: 0.9;
         }
 
-        .tabs {
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .nav {
             display: flex;
             background: #f5f5f5;
             border-bottom: 2px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .tab {
+        .nav a {
             flex: 1;
             padding: 20px;
             text-align: center;
-            cursor: pointer;
             background: #f5f5f5;
-            border: none;
             font-size: 1.1em;
             font-weight: bold;
             transition: all 0.3s;
             color: #666;
+            text-decoration: none;
         }
 
-        .tab:hover {
+        .nav a:hover {
             background: #e0e0e0;
-        }
-
-        .tab.active {
-            background: white;
-            color: #667eea;
-            border-bottom: 3px solid #667eea;
+            color: #2B7FE8;
         }
 
         .content {
@@ -78,15 +86,12 @@
         }
 
         .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
+            margin-bottom: 60px;
+            scroll-margin-top: 80px;
         }
 
         .section-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1FC7C7 0%, #2B7FE8 100%);
             color: white;
             padding: 20px;
             border-radius: 8px;
@@ -103,7 +108,7 @@
             padding: 25px;
             background: #f9f9f9;
             border-radius: 8px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #2B7FE8;
         }
 
         .question-block h3 {
@@ -149,7 +154,7 @@
 
         input[type="number"]:focus, input[type="text"]:focus, textarea:focus, select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #2B7FE8;
         }
 
         textarea {
@@ -182,7 +187,7 @@
         }
 
         .dashboard-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1FC7C7 0%, #2B7FE8 100%);
             color: white;
             padding: 30px;
             border-radius: 12px;
@@ -271,13 +276,128 @@
         }
 
         .complexity-item h4 {
-            color: #667eea;
+            color: #2B7FE8;
             margin-bottom: 10px;
         }
 
         .complexity-item .indicator {
             font-size: 2em;
             margin-bottom: 10px;
+        }
+
+        .submit-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+
+        .submit-section h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .submit-section p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .submit-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus {
+            outline: none;
+            border-color: #2B7FE8;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, #1FC7C7 0%, #2B7FE8 100%);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1FC7C7 0%, #2B7FE8 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         }
 
         @media print {
@@ -288,80 +408,160 @@
                 display: block !important;
                 page-break-after: always;
             }
+            .scroll-to-top {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .header .logo {
+                width: 60px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .nav {
+                flex-wrap: wrap;
+            }
+
+            .nav a {
+                flex: 1 1 50%;
+                padding: 15px 10px;
+                font-size: 0.9em;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .section-header {
+                padding: 15px;
+            }
+
+            .section-header h2 {
+                font-size: 1.4em;
+            }
+
+            .section-header p {
+                font-size: 0.9em;
+            }
+
+            .question-block {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            .question-block h3 {
+                font-size: 1.1em;
+            }
+
+            .question-text {
+                font-size: 0.95em;
+            }
+
+            .why-matters {
+                font-size: 0.85em;
+            }
+
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .dashboard-card {
+                padding: 20px;
+            }
+
+            .dashboard-card .value {
+                font-size: 2em;
+            }
+
+            .complexity-score {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .submit-section {
+                padding: 20px;
+            }
+
+            .submit-button {
+                width: 100%;
+            }
+
+            .scroll-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .header p {
+                font-size: 0.9em;
+            }
+
+            .nav a {
+                flex: 1 1 100%;
+                font-size: 0.95em;
+            }
+
+            .section-header h2 {
+                font-size: 1.2em;
+            }
+
+            .dashboard-card .value {
+                font-size: 1.8em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
+            <img src="assets/Logo_Favicon.png" alt="Logo" class="logo">
             <h1>🎯 AI Readiness Audit</h1>
             <p>Calculate Your Automation ROI & Strategic Readiness</p>
         </div>
 
-        <div class="tabs">
-            <button class="tab active" onclick="showTab('dashboard')">📊 Dashboard</button>
-            <button class="tab" onclick="showTab('section1')">💰 Cost Analysis</button>
-            <button class="tab" onclick="showTab('section2')">⚙️ Complexity</button>
-            <button class="tab" onclick="showTab('section3')">🚦 Readiness</button>
-        </div>
+        <nav class="nav">
+            <a href="#section1">💰 ROI Calculator</a>
+            <a href="#section2">⚙️ Complexity</a>
+            <a href="#section3">🚦 Readiness</a>
+            <a href="#dashboard">📊 Score</a>
+        </nav>
 
         <div class="content">
-            <!-- Dashboard Section -->
-            <div id="dashboard" class="section active dashboard">
-                <div class="section-header">
-                    <h2>Your AI Readiness Score</h2>
-                    <p>Real-time analysis of your automation opportunity</p>
-                </div>
-
-                <div class="dashboard-cards">
-                    <div class="dashboard-card">
-                        <h3>Monthly Waste</h3>
-                        <div class="value" id="monthlyWaste">$0</div>
-                        <p>Lost productivity per month</p>
-                    </div>
-                    <div class="dashboard-card">
-                        <h3>Annual Waste</h3>
-                        <div class="value" id="annualWaste">$0</div>
-                        <p>Total yearly cost</p>
-                    </div>
-                    <div class="dashboard-card">
-                        <h3>Complexity Score</h3>
-                        <div class="value" id="complexityScore">-</div>
-                        <p>Automation difficulty</p>
-                    </div>
-                    <div class="dashboard-card">
-                        <h3>Readiness Level</h3>
-                        <div class="value" id="readinessScore">-</div>
-                        <p>Implementation ready</p>
-                    </div>
-                </div>
-
-                <div class="complexity-score">
-                    <div class="complexity-item">
-                        <h4>Apps Involved</h4>
-                        <div class="indicator" id="appsIndicator">-</div>
-                        <div id="appsStatus">-</div>
-                    </div>
-                    <div class="complexity-item">
-                        <h4>AI Required</h4>
-                        <div class="indicator" id="aiIndicator">-</div>
-                        <div id="aiStatus">-</div>
-                    </div>
-                    <div class="complexity-item">
-                        <h4>Data Type</h4>
-                        <div class="indicator" id="dataIndicator">-</div>
-                        <div id="dataStatus">-</div>
-                    </div>
-                </div>
-
-                <div class="recommendation">
-                    <h3>💡 Recommendation</h3>
-                    <div class="result" id="recommendation">
-                        Complete the audit questions to see your personalized recommendation.
-                    </div>
-                </div>
-            </div>
-
             <!-- Section 1: Cost Analysis -->
             <div id="section1" class="section">
                 <div class="section-header">
@@ -396,11 +596,6 @@
                     <input type="number" id="q3" placeholder="e.g., 60" oninput="calculate()">
                 </div>
 
-                <div class="formula-display">
-                    <strong>Formula:</strong> (Q1 × Q2 ÷ 60) × Q3 = Monthly Waste<br>
-                    <strong>Your Result:</strong> <span id="monthlyWasteCalc">Fill in the fields above</span>
-                </div>
-
                 <div class="question-block">
                     <h3>Q4. The "Cost of Error"</h3>
                     <p class="question-text">"What is the estimated financial impact of a single human error in this process (e.g., lost lead, refund, compliance fine, reputation damage)?"</p>
@@ -408,6 +603,12 @@
                         <strong>Why this matters:</strong> This is the "fear" factor. If one missed email costs a $5k deal, your automation pays for itself instantly.
                     </div>
                     <input type="number" id="q4" placeholder="e.g., 5000" oninput="calculate()">
+                </div>
+
+                <div class="formula-display">
+                    <strong>Formula:</strong> [(Q1 × Q2 ÷ 60) × Q3] + Q4 = Monthly Waste<br>
+                    <small>(Time wasted on repetitive tasks + Cost of errors per month)</small><br>
+                    <strong>Your Result:</strong> <span id="monthlyWasteCalc">Fill in the fields above</span>
                 </div>
             </div>
 
@@ -426,8 +627,8 @@
                         • 1-2 Apps: Simple and fast.<br>
                         • 3+ Apps: Quite complex
                     </div>
-                    <textarea id="q5" placeholder="List all apps separated by commas (e.g., Outlook, Salesforce, Google Sheets)" oninput="calculate()"></textarea>
-                    <div style="margin-top: 10px; color: #667eea; font-weight: bold;" id="appCount"></div>
+                    <textarea id="q5" placeholder="List all apps separated by commas or new lines (e.g., Outlook, Salesforce, Google Sheets)" oninput="calculate()"></textarea>
+                    <div style="margin-top: 10px; color: #2B7FE8; font-weight: bold;" id="appCount"></div>
                 </div>
 
                 <div class="question-block">
@@ -514,28 +715,99 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="section dashboard">
+                <div class="section-header">
+                    <h2>📊 Your AI Readiness Score</h2>
+                    <p>Real-time analysis of your automation opportunity</p>
+                </div>
+
+                <div class="dashboard-cards">
+                    <div class="dashboard-card">
+                        <h3>Monthly Waste</h3>
+                        <div class="value" id="monthlyWaste">$0</div>
+                        <p>Lost productivity per month</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Annual Waste</h3>
+                        <div class="value" id="annualWaste">$0</div>
+                        <p>Total yearly cost</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Complexity Score</h3>
+                        <div class="value" id="complexityScore">-</div>
+                        <p>Automation difficulty</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Readiness Level</h3>
+                        <div class="value" id="readinessScore">-</div>
+                        <p>Implementation ready</p>
+                    </div>
+                </div>
+
+                <div class="complexity-score">
+                    <div class="complexity-item">
+                        <h4>Apps Involved</h4>
+                        <div class="indicator" id="appsIndicator">-</div>
+                        <div id="appsStatus">-</div>
+                    </div>
+                    <div class="complexity-item">
+                        <h4>AI Required</h4>
+                        <div class="indicator" id="aiIndicator">-</div>
+                        <div id="aiStatus">-</div>
+                    </div>
+                    <div class="complexity-item">
+                        <h4>Data Type</h4>
+                        <div class="indicator" id="dataIndicator">-</div>
+                        <div id="dataStatus">-</div>
+                    </div>
+                </div>
+
+                <div class="recommendation">
+                    <h3>💡 Recommendation</h3>
+                    <div class="result" id="recommendation">
+                        Complete the audit questions to see your personalized recommendation.
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <h3>📨 Get Your Results</h3>
+                    <p>Submit your information to receive a detailed analysis and next steps.</p>
+                    <form id="submitForm" class="submit-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="companyName">Company Name *</label>
+                                <input type="text" id="companyName" name="companyName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <input type="hidden" id="recommendationData" name="recommendationData">
+                        <input type="hidden" id="monthlyWasteData" name="monthlyWaste">
+                        <input type="hidden" id="annualWasteData" name="annualWaste">
+                        <input type="hidden" id="complexityScoreData" name="complexityScore">
+                        <input type="hidden" id="readinessScoreData" name="readinessScore">
+                        <button type="submit" class="submit-button">Submit Results</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        function showTab(tabId) {
-            // Hide all sections
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            // Show selected section
-            document.getElementById(tabId).classList.add('active');
-
-            // Add active class to clicked tab
-            event.target.classList.add('active');
-        }
-
         function calculate() {
             // Get values
             const q1 = parseFloat(document.getElementById('q1').value) || 0;
@@ -554,7 +826,8 @@
 
             // Q5 - App count
             const q5 = document.getElementById('q5').value;
-            const appList = q5.split(',').filter(app => app.trim() !== '');
+            // Split by both commas and newlines
+            const appList = q5.split(/[,\n]/).filter(app => app.trim() !== '');
             const appCount = appList.length;
 
             if (appCount > 0) {
@@ -635,6 +908,9 @@
 
             // Generate recommendation
             generateRecommendation(annualWaste, requiresAI, appCount, dataType, hasDocumentation, hasAuthorization);
+
+            // Update hidden form fields
+            updateFormData();
         }
 
         function generateRecommendation(annualWaste, requiresAI, appCount, dataType, hasDocumentation, hasAuthorization) {
@@ -688,10 +964,89 @@
             }
         }
 
+        function updateFormData() {
+            // Update hidden fields with current data
+            const recommendationText = document.getElementById('recommendation').innerText;
+            const monthlyWaste = document.getElementById('monthlyWaste').textContent;
+            const annualWaste = document.getElementById('annualWaste').textContent;
+            const complexityScore = document.getElementById('complexityScore').textContent;
+            const readinessScore = document.getElementById('readinessScore').textContent;
+
+            document.getElementById('recommendationData').value = recommendationText;
+            document.getElementById('monthlyWasteData').value = monthlyWaste;
+            document.getElementById('annualWasteData').value = annualWaste;
+            document.getElementById('complexityScoreData').value = complexityScore;
+            document.getElementById('readinessScoreData').value = readinessScore;
+        }
+
         // Initialize calculations on page load
         document.addEventListener('DOMContentLoaded', function() {
             calculate();
+
+            // Handle form submission
+            const form = document.getElementById('submitForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Get form data
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+
+                // Disable submit button during submission
+                const submitButton = form.querySelector('.submit-button');
+                submitButton.disabled = true;
+                submitButton.textContent = 'Submitting...';
+
+                // Send data to backend
+                fetch('https://n8n.dataflow-labs.de/webhook/36841c3f-a6fc-4187-9171-09023bb74602', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('Thank you! Your results have been submitted successfully.');
+                    form.reset();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('There was an error submitting your results. Please try again.');
+                })
+                .finally(() => {
+                    // Re-enable submit button
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Submit Results';
+                });
+            });
+        });
+
+        // Scroll to top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     </script>
+
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">↑</button>
 </body>
 </html>

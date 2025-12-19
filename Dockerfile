@@ -2,7 +2,7 @@
 FROM nginx:alpine
 
 # Copy the HTML file to nginx's default html directory
-COPY ai-readiness-audit.html /usr/share/nginx/html/index.html
+COPY index.html /usr/share/nginx/html/index.html
 
 # Set proper permissions
 RUN chmod -R 755 /usr/share/nginx/html && \
