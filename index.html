@@ -1007,14 +1007,14 @@
                 </div>
 
                 <div class="question-block">
-                    <h3>Q6. The "App Stack" Count</h3>
+                    <h3>Q6. Software Count</h3>
                     <p class="question-text">List all the software platforms involved in this workflow (e.g., Outlook, Salesforce, Google Sheets, Slack, PDF Parser).</p>
                     <div class="why-matters">
                         <strong>Qualification:</strong><br>
-                        • 1-2 Apps: Simple and fast.<br>
-                        • 3+ Apps: Quite complex
+                        • 1-2 Software: Simple and fast.<br>
+                        • 3+ Software: Quite complex
                     </div>
-                    <textarea id="q6" placeholder="List all apps separated by commas or new lines (e.g., Outlook, Salesforce, Google Sheets)" oninput="calculate()"></textarea>
+                    <textarea id="q6" placeholder="List all software separated by commas or new lines (e.g., Outlook, Salesforce, Google Sheets)" oninput="calculate()"></textarea>
                     <div style="margin-top: 10px; color: #2B7FE8; font-weight: bold;" id="appCount"></div>
                 </div>
 
@@ -1289,7 +1289,7 @@
             const appCount = appList.length;
 
             if (appCount > 0) {
-                document.getElementById('appCount').textContent = `${appCount} apps detected`;
+                document.getElementById('appCount').textContent = `${appCount} software detected`;
                 document.getElementById('appsIndicator').textContent = appCount;
 
                 if (appCount <= 2) {
@@ -1420,7 +1420,7 @@
                     </div>
                     <strong>💡 Recommendation: DIY Solution</strong><br><br>
                     Your annual waste may not justify a custom automation investment.<br><br>
-                    ${appCount <= 2 ? 'With only ' + appCount + ' apps involved, ' : ''}Consider using tools like:<br>
+                    ${appCount <= 2 ? 'With only ' + appCount + ' software involved, ' : ''}Consider using tools like:<br>
                     • ChatGPT for manual assistance<br>
                     • Zapier or Make.com for simple automation<br>
                     • Internal process optimization<br><br>
@@ -1437,7 +1437,7 @@
                         <div class="loss-period">PER YEAR</div>
                     </div>
                     <strong>💼 Good Automation Candidate</strong><br><br>
-                    ${appCount >= 3 ? 'With ' + appCount + ' apps involved, this requires professional integration.<br><br>' : ''}
+                    ${appCount >= 3 ? 'With ' + appCount + ' software involved, this requires professional integration.<br><br>' : ''}
                     ${requiresAI ? 'This task requires AI decision-making capabilities.<br><br>' : 'This could be automated with workflow tools or AI assistance.<br><br>'}
                     ${dataType === 'unstructured' ? 'Unstructured data adds complexity and value to automation.<br><br>' : ''}
                     ${!hasDocumentation ? '<strong>⚠️ Next Step:</strong> Consider a "Discovery & Mapping Workshop" to document your process.<br><br>' : ''}
