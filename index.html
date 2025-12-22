@@ -36,7 +36,7 @@
         }
 
         .header .logo {
-            width: 80px;
+            width: 200px;
             height: auto;
             margin-bottom: 20px;
         }
@@ -44,6 +44,24 @@
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
+        }
+
+        .header h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .header h2 a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            transition: border-color 0.3s;
+        }
+
+        .header h2 a:hover {
+            border-bottom-color: white;
         }
 
         .header p {
@@ -109,6 +127,22 @@
             background: #f9f9f9;
             border-radius: 8px;
             border-left: 4px solid #2B7FE8;
+            transition: all 0.3s ease;
+        }
+
+        #q11block {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .question-block h3 {
@@ -139,6 +173,12 @@
             border: 2px solid #ddd;
             border-radius: 6px;
             transition: border-color 0.3s;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        select {
+            cursor: pointer;
+            background-color: white;
         }
 
         /* Remove spinner arrows from number inputs */
@@ -162,17 +202,33 @@
             resize: vertical;
         }
 
-        .formula-display {
-            background: #e8f5e9;
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 20px;
-            border-left: 4px solid #4caf50;
+        .result-display {
+            background: linear-gradient(135deg, #FF4B4B 0%, #FF8C00 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(255, 75, 75, 0.4);
+            border: 2px solid #FF0000;
         }
 
-        .formula-display strong {
-            color: #2e7d32;
-            font-size: 1.1em;
+        .result-display h3 {
+            color: white;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .result-value {
+            background: white;
+            color: #DC143C;
+            font-size: 2.5em;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border: 2px solid #FF4B4B;
         }
 
         .dashboard {
@@ -225,6 +281,50 @@
             border-radius: 8px;
             font-size: 1.1em;
             line-height: 1.6;
+        }
+
+        .annual-loss-banner {
+            background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+            color: white;
+            padding: 30px;
+            margin: -20px -20px 25px -20px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+            border: 3px solid #8B0000;
+        }
+
+        .loss-label {
+            font-size: 1.2em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .loss-amount {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin: 15px 0;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .loss-period {
+            font-size: 1.3em;
+            font-weight: 600;
+            letter-spacing: 3px;
+            margin-top: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
         }
 
         .result.low-value {
@@ -302,6 +402,69 @@
         .submit-section p {
             color: #666;
             margin-bottom: 20px;
+        }
+
+        .explanatory-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            line-height: 1.8;
+        }
+
+        .explanatory-content h3 {
+            font-size: 1.5em;
+            color: #2B7FE8;
+            margin: 30px 0 15px 0;
+        }
+
+        .explanatory-content h4 {
+            font-size: 1.2em;
+            color: #333;
+            margin: 20px 0 10px 0;
+        }
+
+        .explanatory-content p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .explanatory-content ul {
+            margin: 15px 0 15px 30px;
+            color: #555;
+        }
+
+        .explanatory-content li {
+            margin-bottom: 10px;
+        }
+
+        .explanatory-content strong {
+            color: #2B7FE8;
+        }
+
+        .bucket-card {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2B7FE8;
+        }
+
+        .bucket-card h4 {
+            font-size: 1.3em;
+            color: #2B7FE8;
+            margin-bottom: 10px;
+        }
+
+        .video-placeholder {
+            background: #f0f0f0;
+            padding: 60px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 2px dashed #ccc;
+            color: #999;
         }
 
         .submit-form {
@@ -423,11 +586,15 @@
             }
 
             .header .logo {
-                width: 60px;
+                width: 150px;
             }
 
             .header h1 {
                 font-size: 1.8em;
+            }
+
+            .header h2 {
+                font-size: 1.1em;
             }
 
             .header p {
@@ -520,11 +687,73 @@
                 right: 20px;
                 font-size: 20px;
             }
+
+            .explanatory-content {
+                padding: 25px 20px;
+            }
+
+            .explanatory-content h3 {
+                font-size: 1.3em;
+            }
+
+            .explanatory-content p {
+                font-size: 1em;
+            }
+
+            .bucket-card {
+                padding: 20px;
+            }
+
+            .bucket-card h4 {
+                font-size: 1.15em;
+            }
+
+            .video-placeholder {
+                padding: 40px 20px;
+                font-size: 0.9em;
+            }
+
+            .result-display {
+                padding: 25px 20px;
+            }
+
+            .result-display h3 {
+                font-size: 1.3em;
+            }
+
+            .result-value {
+                font-size: 2em;
+                padding: 15px;
+            }
+
+            .annual-loss-banner {
+                padding: 25px 20px;
+            }
+
+            .loss-label {
+                font-size: 1.1em;
+            }
+
+            .loss-amount {
+                font-size: 3em;
+            }
+
+            .loss-period {
+                font-size: 1.2em;
+            }
         }
 
         @media (max-width: 480px) {
+            .header .logo {
+                width: 120px;
+            }
+
             .header h1 {
                 font-size: 1.5em;
+            }
+
+            .header h2 {
+                font-size: 1em;
             }
 
             .header p {
@@ -543,35 +772,175 @@
             .dashboard-card .value {
                 font-size: 1.8em;
             }
+
+            .explanatory-content {
+                padding: 20px 15px;
+            }
+
+            .explanatory-content h3 {
+                font-size: 1.2em;
+            }
+
+            .explanatory-content h4 {
+                font-size: 1.1em;
+            }
+
+            .explanatory-content p {
+                font-size: 0.95em;
+            }
+
+            .bucket-card {
+                padding: 15px;
+            }
+
+            .bucket-card h4 {
+                font-size: 1.1em;
+            }
+
+            .video-placeholder {
+                padding: 30px 15px;
+                font-size: 0.85em;
+            }
+
+            .result-display {
+                padding: 20px 15px;
+            }
+
+            .result-display h3 {
+                font-size: 1.2em;
+            }
+
+            .result-value {
+                font-size: 1.8em;
+                padding: 15px 10px;
+            }
+
+            .annual-loss-banner {
+                padding: 20px 15px;
+            }
+
+            .loss-label {
+                font-size: 1em;
+                letter-spacing: 1px;
+            }
+
+            .loss-amount {
+                font-size: 2.5em;
+            }
+
+            .loss-period {
+                font-size: 1.1em;
+                letter-spacing: 2px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="assets/Logo_Favicon.png" alt="Logo" class="logo">
+            <img src="assets/AI_Agent_Services_Logo_White.png" alt="AI Agent Services Logo" class="logo">
             <h1>🎯 AI Readiness Audit</h1>
-            <p>Calculate Your Automation ROI & Strategic Readiness</p>
+            <h2>Powered by <a href="https://ai-agent-services.com">AI Agent Services</a></h2>
+            <p>Calculate Your Automation Return on Investment (ROI) & Strategic Readiness</p>
         </div>
 
         <nav class="nav">
-            <a href="#section1">💰 ROI Calculator</a>
-            <a href="#section2">⚙️ Complexity</a>
-            <a href="#section3">🚦 Readiness</a>
+            <a href="#section1">💡 Why Free?</a>
+            <a href="#section2">🎯 Pick a Process</a>
+            <a href="#section3">💰 Cost Calculator</a>
+            <a href="#section4">⚙️ Complexity</a>
+            <a href="#section5">🚦 Readiness</a>
             <a href="#dashboard">📊 Score</a>
         </nav>
 
         <div class="content">
-            <!-- Section 1: Cost Analysis -->
+            <!-- Section 1: Why Free -->
             <div id="section1" class="section">
                 <div class="section-header">
-                    <h2>📊 Section 1: ROI Calculator</h2>
+                    <h2>💡 Section 1: Why We Give You this Much Value For Free?!?!</h2>
+                    <p>Understanding our mission and how this audit helps you</p>
+                </div>
+
+                <div class="explanatory-content">
+                    <p>Welcome to your AI Readiness audit. Over the years, we've helped Scale-Ups and Enterprises make and save millions by utilizing AI + Automation. This audit was built because we can't have calls with every client that wants our help.</p>
+
+                    <h3>This will give you a great starting point to determine:</h3>
+                    <ul>
+                        <li><strong>How much money you're losing</strong> with your current business processes.</li>
+                        <li><strong>If you can fix it on your own</strong> or if you should pull in an expert.</li>
+                        <li><strong>What you need to do</strong> before implementation.</li>
+                    </ul>
+
+                    <h3>Why is this free?</h3>
+                    <p>Every business can benefit from AI + Automation, but we only work with companies that have a <strong>$20,000+ budget</strong> to invest. We still want everyone to get the benefit of knowing what to do. This helps smaller companies solve simple challenges on their own, and companies with budget and complex problems learn where to start.</p>
+                </div>
+            </div>
+            <!-- Section 2: Pick a Process -->
+            <div id="section2" class="section">
+                <div class="section-header">
+                    <h2>🎯 Section 2: Pick a Business Process to Transform</h2>
+                    <p>Identify the right process for maximum impact</p>
+                </div>
+
+                <div class="explanatory-content">
+                    <h4>INSTRUCTION 1</h4>
+                    <p>Most executives we speak with have a few things in mind when we ask them - <strong>what process is currently costing you the most money?</strong></p>
+
+                    <p>Don't try to "fix everything." Instead, look for one process that fits into one of the three buckets below.</p>
+
+                    <div class="bucket-card">
+                        <h4>1. Revenue Generating Tasks (The "Unlock" Bucket)</h4>
+                        <p><strong>Focus:</strong> Freeing up your best talent to generate new value. Think about where your most expensive or talented people are getting bogged down. If you could reclaim 20% of their week, could they close more deals, build better products, or serve more customers?</p>
+                        <p><strong>Ask yourself:</strong> "Where is my team doing 'busy work' that prevents them from selling or strategizing?"</p>
+                        <p><strong>Look for:</strong> Sales outreach, personalized marketing content, customer onboarding, or drafting proposals.</p>
+                    </div>
+
+                    <div class="bucket-card">
+                        <h4>2. Operating Expenses (The "Efficiency" Bucket)</h4>
+                        <p><strong>Focus:</strong> Reducing the cost of doing business. Identify the tasks that happen frequently, consume a lot of hours, and require little "human" judgment. These are the administrative burdens that bloat your overhead.</p>
+                        <p><strong>Ask yourself:</strong> "What is a necessary evil that we spend way too much time and money on?"</p>
+                        <p><strong>Look for:</strong> Invoice processing, scheduling, data entry, report generation, or answering Tier 1 support questions.</p>
+                    </div>
+
+                    <div class="bucket-card">
+                        <h4>3. Error-Prone Tasks (The "Quality" Bucket)</h4>
+                        <p><strong>Focus:</strong> Reducing risk and costly mistakes. Find the processes where "human error" is a constant worry. These are often complex routines that require high accuracy, strict compliance, or intense inspection.</p>
+                        <p><strong>Ask yourself:</strong> "Where do we constantly have to double-check work or fix mistakes after the fact?"</p>
+                        <p><strong>Look for:</strong> Contract review, compliance checks, transferring data between systems, or quality assurance inspections.</p>
+                    </div>
+
+                    <div class="video-placeholder">
+                        📹 Video Placeholder - Explanatory video about choosing the right process
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <h3>What Bucket does your process best fit into?</h3>
+                    <select id="processBucket" name="processBucket" onchange="calculate()">
+                        <option value="">Select a bucket...</option>
+                        <option value="unlock">1. Revenue Generating Tasks (The "Unlock" Bucket)</option>
+                        <option value="efficiency">2. Operating Expenses (The "Efficiency" Bucket)</option>
+                        <option value="quality">3. Error-Prone Tasks (The "Quality" Bucket)</option>
+                    </select>
+                </div>
+
+                <div class="question-block">
+                    <h3>Describe the current process in as much detail as possible</h3>
+                    <p class="question-text">This will be sent to you with the full report.</p>
+                    <textarea id="processDescription" name="processDescription" rows="8" placeholder="Describe your process step by step. Include details about who does what, which tools are used, how long it takes, and where problems typically occur..." oninput="updateFormData()"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 3: Cost Calculator -->
+            <div id="section3" class="section">
+                <div class="section-header">
+                    <h2>💰 Section 3: Cost Calculator</h2>
                     <p>Calculate the financial impact of your current process</p>
                 </div>
 
                 <div class="question-block">
                     <h3>Q1. Task Frequency & Volume</h3>
-                    <p class="question-text">"How many times per month is this specific process performed across the entire company?"</p>
+                    <p class="question-text">How many times per month is this specific process performed across the entire company?</p>
                     <div class="why-matters">
                         <strong>Why this matters:</strong> Automation thrives on volume. Low volume = low ROI. High volume = high ROI.
                     </div>
@@ -580,7 +949,7 @@
 
                 <div class="question-block">
                     <h3>Q2. Human Time per Instance</h3>
-                    <p class="question-text">"On average, how many minutes does it take a human to complete one instance of this task (including switching tabs, logging in, thinking time)?"</p>
+                    <p class="question-text">On average, how many minutes does it take a human to complete one instance of this task (including switching tabs, logging in, thinking time)?</p>
                     <div class="why-matters">
                         <strong>Why this matters:</strong> Executives usually underestimate this. 5 minutes x 1000 times a month = 83 hours lost.
                     </div>
@@ -588,98 +957,116 @@
                 </div>
 
                 <div class="question-block">
-                    <h3>Q3. Fully Burdened Hourly Cost</h3>
-                    <p class="question-text">"What is the average hourly cost of the employee doing this task? (Salary + Overhead usually ≈ $40-$80/hr)."</p>
+                    <h3>Q3. Annual Salary</h3>
+                    <p class="question-text">What is the average annual salary of the employee doing this task?</p>
                     <div class="why-matters">
-                        <strong>Why this matters:</strong> This metric can be measured very accurately.
+                        <strong>Why this matters:</strong> We'll calculate the hourly cost by dividing your annual salary by 2,080 hours (52 weeks × 40 hours). This gives us an accurate cost per hour for your calculations.
                     </div>
-                    <input type="number" id="q3" placeholder="e.g., 60" oninput="calculate()">
+                    <input type="number" id="q3" placeholder="e.g., 65000" oninput="calculate()">
+                    <div style="margin-top: 10px; color: #2B7FE8; font-weight: bold;" id="hourlyRate"></div>
                 </div>
 
                 <div class="question-block">
                     <h3>Q4. The "Cost of Error"</h3>
-                    <p class="question-text">"What is the estimated financial impact of a single human error in this process (e.g., lost lead, refund, compliance fine, reputation damage)?"</p>
+                    <p class="question-text">What is the estimated financial impact of a single human error in this process (e.g., lost lead, refund, compliance fine, reputation damage)?</p>
                     <div class="why-matters">
                         <strong>Why this matters:</strong> If one missed email costs a $5k deal, your automation pays for itself instantly.
                     </div>
                     <input type="number" id="q4" placeholder="e.g., 5000" oninput="calculate()">
                 </div>
 
-                <div class="formula-display">
-                    <strong>Formula:</strong> [(Q1 × Q2 ÷ 60) × Q3] + Q4 = Monthly Waste<br>
-                    <small>(Time wasted on repetitive tasks + Cost of errors per month)</small><br>
-                    <strong>Your Result:</strong> <span id="monthlyWasteCalc">Fill in the fields above</span>
+                <div class="result-display">
+                    <h3>💰 Your Monthly Cost</h3>
+                    <div class="result-value" id="monthlyWasteCalc">Fill in the fields above</div>
                 </div>
             </div>
 
-            <!-- Section 2: Complexity -->
-            <div id="section2" class="section">
+            <!-- Section 4: Complexity -->
+            <div id="section4" class="section">
                 <div class="section-header">
-                    <h2>⚙️ Section 2: Complexity</h2>
+                    <h2>⚙️ Section 4: Complexity</h2>
                     <p>Check how complex the process is</p>
                 </div>
 
                 <div class="question-block">
-                    <h3>Q5. The "App Stack" Count</h3>
-                    <p class="question-text">"List all the software platforms involved in this workflow (e.g., Outlook, Salesforce, Google Sheets, Slack, PDF Parser)."</p>
+                    <h3>Q5. You know better than anyone, please choose one of the following:</h3>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q5complex" name="q5" value="complex" onchange="calculate()">
+                            <label for="q5complex">The system and setup is very complex</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q5manageable" name="q5" value="manageable" onchange="calculate()">
+                            <label for="q5manageable">It has its challenges but it's manageable</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q5simple" name="q5" value="simple" onchange="calculate()">
+                            <label for="q5simple">It's pretty simple and straightforward</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <h3>Q6. The "App Stack" Count</h3>
+                    <p class="question-text">List all the software platforms involved in this workflow (e.g., Outlook, Salesforce, Google Sheets, Slack, PDF Parser).</p>
                     <div class="why-matters">
                         <strong>Qualification:</strong><br>
                         • 1-2 Apps: Simple and fast.<br>
                         • 3+ Apps: Quite complex
                     </div>
-                    <textarea id="q5" placeholder="List all apps separated by commas or new lines (e.g., Outlook, Salesforce, Google Sheets)" oninput="calculate()"></textarea>
+                    <textarea id="q6" placeholder="List all apps separated by commas or new lines (e.g., Outlook, Salesforce, Google Sheets)" oninput="calculate()"></textarea>
                     <div style="margin-top: 10px; color: #2B7FE8; font-weight: bold;" id="appCount"></div>
                 </div>
 
                 <div class="question-block">
-                    <h3>Q6. Cognitive Load (The AI Trigger)</h3>
-                    <p class="question-text">"Does this task require reading unstructured text (emails, PDFs) and making a decision/judgment?"</p>
+                    <h3>Q7. Cognitive Load (The AI Trigger)</h3>
+                    <p class="question-text">Does this task require reading unstructured text (emails, PDFs) and making a decision/judgment?</p>
                     <div class="why-matters">
                         <strong>Qualification:</strong><br>
-                        • No (Just copy-paste): Simple automation.<br>
-                        • Yes: This requires AI Agents (LLMs). 
+                        • Yes - Requires AI/Decision Making<br>
+                        • No - Simple Copy/Paste
                     </div>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" id="q6yes" name="q6" value="yes" onchange="calculate()">
-                            <label for="q6yes">Yes - Requires AI/Decision Making</label>
+                            <input type="radio" id="q7yes" name="q7" value="yes" onchange="calculate()">
+                            <label for="q7yes">Yes - Requires AI/Decision Making</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="q6no" name="q6" value="no" onchange="calculate()">
-                            <label for="q6no">No - Simple Copy/Paste</label>
+                            <input type="radio" id="q7no" name="q7" value="no" onchange="calculate()">
+                            <label for="q7no">No - Simple Copy/Paste</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="question-block">
-                    <h3>Q7. Data Stability</h3>
-                    <p class="question-text">"Is the data for this process structured (databases/Excel) or unstructured (emails/phone calls/PDFs)?"</p>
+                    <h3>Q8. Data Stability</h3>
+                    <p class="question-text">Is the data for this process structured (databases/Excel) or unstructured (emails/phone calls/PDFs)?</p>
                     <div class="why-matters">
                         <strong>Why this matters:</strong> Unstructured data is the hardest problem to solve.
                     </div>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" id="q7unstructured" name="q7" value="unstructured" onchange="calculate()">
-                            <label for="q7unstructured">Unstructured (emails, PDFs, calls)</label>
+                            <input type="radio" id="q8unstructured" name="q8" value="unstructured" onchange="calculate()">
+                            <label for="q8unstructured">Unstructured (emails, PDFs, calls)</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="q7structured" name="q7" value="structured" onchange="calculate()">
-                            <label for="q7structured">Structured (databases, Excel)</label>
+                            <input type="radio" id="q8structured" name="q8" value="structured" onchange="calculate()">
+                            <label for="q8structured">Structured (databases, Excel)</label>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Section 3: Readiness -->
-            <div id="section3" class="section">
+            <!-- Section 5: Readiness -->
+            <div id="section5" class="section">
                 <div class="section-header">
-                    <h2>🚦 Section 3: Readiness</h2>
+                    <h2>🚦 Section 5: Readiness</h2>
                     <p>How fast can you start the project</p>
                 </div>
 
                 <div class="question-block">
-                    <h3>Q8. Process Documentation</h3>
-                    <p class="question-text">"Is there a current Standard Operating Procedure (SOP) or Loom video documenting this process step-by-step?"</p>
+                    <h3>Q9. Process Documentation</h3>
+                    <p class="question-text">Is there a current Standard Operating Procedure (SOP) or video documenting this process step-by-step?</p>
                     <div class="why-matters">
                         <strong>The Filter:</strong><br>
                         • Yes: Ready to build.<br>
@@ -687,30 +1074,66 @@
                     </div>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" id="q8yes" name="q8" value="yes" onchange="calculate()">
-                            <label for="q8yes">Yes - We have documentation</label>
+                            <input type="radio" id="q9yes" name="q9" value="yes" onchange="calculate()">
+                            <label for="q9yes">Yes - We have documentation</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="q8no" name="q8" value="no" onchange="calculate()">
-                            <label for="q8no">No - Process not documented</label>
+                            <input type="radio" id="q9no" name="q9" value="no" onchange="calculate()">
+                            <label for="q9no">No - Process not documented</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="question-block">
-                    <h3>Q9. Authorization Level</h3>
-                    <p class="question-text">"Do you own the budget and admin permissions for the software tools involved?"</p>
+                    <h3>Q10. I have allocated budget for implementing new technology, AI, and automation.</h3>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q10yes" name="q10" value="yes" onchange="toggleBudgetQuestion()">
+                            <label for="q10yes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q10no" name="q10" value="no" onchange="toggleBudgetQuestion()">
+                            <label for="q10no">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block" id="q11block" style="display: none;">
+                    <h3>Q11. What budget do you have?</h3>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="q11range1" name="q11" value="0-20000" onchange="calculate()">
+                            <label for="q11range1">$0-$20,000</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q11range2" name="q11" value="20000-100000" onchange="calculate()">
+                            <label for="q11range2">$20,000-$100,000</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q11range3" name="q11" value="100000-500000" onchange="calculate()">
+                            <label for="q11range3">$100,000-$500,000</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="q11range4" name="q11" value="500000+" onchange="calculate()">
+                            <label for="q11range4">$500,000+</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <h3>Q12. Authorization Level</h3>
+                    <p class="question-text">Do you own the budget and admin permissions for the software tools involved?</p>
                     <div class="why-matters">
-                        <strong>Why this matters:</strong> If your answer is no, IT approval may take weeks and slow down implementation.
+                        <strong>Why this matters:</strong> If your answer is no, approval may take weeks and slow down implementation.
                     </div>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" id="q9yes" name="q9" value="yes" onchange="calculate()">
-                            <label for="q9yes">Yes - I have budget & permissions</label>
+                            <input type="radio" id="q12yes" name="q12" value="yes" onchange="calculate()">
+                            <label for="q12yes">Yes - I have budget & permissions</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="q9no" name="q9" value="no" onchange="calculate()">
-                            <label for="q9no">No - Need IT approval</label>
+                            <input type="radio" id="q12no" name="q12" value="no" onchange="calculate()">
+                            <label for="q12no">No - I need approval</label>
                         </div>
                     </div>
                 </div>
@@ -795,6 +1218,11 @@
                                 <input type="email" id="email" name="email" required>
                             </div>
                         </div>
+                        <input type="hidden" id="processBucketData" name="processBucket">
+                        <input type="hidden" id="processDescriptionData" name="processDescription">
+                        <input type="hidden" id="appListData" name="appList">
+                        <input type="hidden" id="hasBudgetData" name="hasBudget">
+                        <input type="hidden" id="budgetRangeData" name="budgetRange">
                         <input type="hidden" id="recommendationData" name="recommendationData">
                         <input type="hidden" id="monthlyWasteData" name="monthlyWaste">
                         <input type="hidden" id="annualWasteData" name="annualWaste">
@@ -808,15 +1236,41 @@
     </div>
 
     <script>
+        function toggleBudgetQuestion() {
+            const q10 = document.querySelector('input[name="q10"]:checked');
+            const q11block = document.getElementById('q11block');
+
+            if (q10 && q10.value === 'yes') {
+                q11block.style.display = 'block';
+            } else {
+                q11block.style.display = 'none';
+                // Clear Q11 selection when hidden
+                const q11radios = document.querySelectorAll('input[name="q11"]');
+                q11radios.forEach(radio => radio.checked = false);
+            }
+
+            calculate();
+        }
+
         function calculate() {
             // Get values
             const q1 = parseFloat(document.getElementById('q1').value) || 0;
             const q2 = parseFloat(document.getElementById('q2').value) || 0;
-            const q3 = parseFloat(document.getElementById('q3').value) || 0;
+            const q3AnnualSalary = parseFloat(document.getElementById('q3').value) || 0;
             const q4 = parseFloat(document.getElementById('q4').value) || 0;
 
+            // Calculate hourly rate from annual salary (52 weeks × 40 hours = 2,080 hours per year)
+            const hourlyRate = q3AnnualSalary / 2080;
+
+            // Display hourly rate
+            if (q3AnnualSalary > 0) {
+                document.getElementById('hourlyRate').textContent = `Calculated Hourly Rate: $${hourlyRate.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} per hour`;
+            } else {
+                document.getElementById('hourlyRate').textContent = '';
+            }
+
             // Calculate monthly and annual waste (including cost of error)
-            const monthlyWaste = (q1 * q2 / 60) * q3 + q4;
+            const monthlyWaste = (q1 * q2 / 60) * hourlyRate + q4;
             const annualWaste = monthlyWaste * 12;
 
             // Update dashboard
@@ -824,10 +1278,14 @@
             document.getElementById('annualWaste').textContent = '$' + annualWaste.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             document.getElementById('monthlyWasteCalc').textContent = `$${monthlyWaste.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} per month`;
 
-            // Q5 - App count
-            const q5 = document.getElementById('q5').value;
+            // Q5 - User complexity assessment
+            const q5 = document.querySelector('input[name="q5"]:checked');
+            const userComplexity = q5 ? q5.value : null;
+
+            // Q6 - App count
+            const q6 = document.getElementById('q6').value;
             // Split by both commas and newlines
-            const appList = q5.split(/[,\n]/).filter(app => app.trim() !== '');
+            const appList = q6.split(/[,\n]/).filter(app => app.trim() !== '');
             const appCount = appList.length;
 
             if (appCount > 0) {
@@ -845,9 +1303,9 @@
                 document.getElementById('appsStatus').textContent = '-';
             }
 
-            // Q6 - Cognitive load
-            const q6 = document.querySelector('input[name="q6"]:checked');
-            const requiresAI = q6 ? q6.value === 'yes' : null;
+            // Q7 - Cognitive load
+            const q7 = document.querySelector('input[name="q7"]:checked');
+            const requiresAI = q7 ? q7.value === 'yes' : null;
 
             if (requiresAI !== null) {
                 document.getElementById('aiIndicator').textContent = requiresAI ? '🤖' : '✓';
@@ -857,9 +1315,9 @@
                 document.getElementById('aiStatus').textContent = '-';
             }
 
-            // Q7 - Data type
-            const q7 = document.querySelector('input[name="q7"]:checked');
-            const dataType = q7 ? q7.value : null;
+            // Q8 - Data type
+            const q8 = document.querySelector('input[name="q8"]:checked');
+            const dataType = q8 ? q8.value : null;
 
             if (dataType) {
                 document.getElementById('dataIndicator').textContent = dataType === 'unstructured' ? '📄' : '📊';
@@ -869,24 +1327,36 @@
                 document.getElementById('dataStatus').textContent = '-';
             }
 
-            // Q8 & Q9 - Readiness
-            const q8 = document.querySelector('input[name="q8"]:checked');
+            // Q9, Q10, Q11, Q12 - Readiness
             const q9 = document.querySelector('input[name="q9"]:checked');
+            const q10 = document.querySelector('input[name="q10"]:checked');
+            const q11 = document.querySelector('input[name="q11"]:checked');
+            const q12 = document.querySelector('input[name="q12"]:checked');
 
-            const hasDocumentation = q8 ? q8.value === 'yes' : null;
-            const hasAuthorization = q9 ? q9.value === 'yes' : null;
+            const hasDocumentation = q9 ? q9.value === 'yes' : null;
+            const hasBudget = q10 ? q10.value === 'yes' : null;
+            const budgetRange = q11 ? q11.value : null;
+            const hasAuthorization = q12 ? q12.value === 'yes' : null;
 
             // Calculate complexity score
             let complexityScore = '-';
-            if (appCount > 0 || requiresAI !== null || dataType !== null) {
+            if (userComplexity !== null || requiresAI !== null || dataType !== null) {
                 let score = 0;
-                if (appCount >= 3) score++;
+
+                // Q5 user assessment contributes to complexity
+                if (userComplexity === 'complex') score += 2;
+                else if (userComplexity === 'manageable') score += 1;
+                // 'simple' adds 0
+
+                // App count is excluded from complexity calculation
+                // if (appCount >= 3) score++;
+
                 if (requiresAI) score++;
                 if (dataType === 'unstructured') score++;
 
-                if (score === 0) complexityScore = 'Low';
-                else if (score === 1) complexityScore = 'Medium';
-                else if (score === 2) complexityScore = 'High';
+                if (score <= 1) complexityScore = 'Low';
+                else if (score === 2 || score === 3) complexityScore = 'Medium';
+                else if (score === 4) complexityScore = 'High';
                 else complexityScore = 'Expert';
             }
 
@@ -927,8 +1397,12 @@
             if (annualWaste >= 40000 && requiresAI) {
                 recommendationDiv.className = 'result perfect-lead';
                 recommendationDiv.innerHTML = `
+                    <div class="annual-loss-banner">
+                        <div class="loss-label">🚨 YOU ARE LOSING</div>
+                        <div class="loss-amount">$${annualWaste.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+                        <div class="loss-period">PER YEAR</div>
+                    </div>
                     <strong>🎯 URGENT: Perfect Fit for AI Agent Automation</strong><br><br>
-                    You are losing <strong>$${(annualWaste/12).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}/month</strong> (${(annualWaste).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} annually) on this process.<br><br>
                     This task requires decision-making and AI capabilities, which makes it a high-value automation opportunity.<br><br>
                     ${!hasDocumentation ? '<strong>⚠️ Action Required:</strong> You need a "Discovery & Mapping Workshop" ($2k-$5k) before building the agent.<br><br>' : ''}
                     ${!hasAuthorization ? '<strong>⚠️ Warning:</strong> IT approval required may slow implementation.<br><br>' : ''}
@@ -939,8 +1413,13 @@
             else if (annualWaste < 10000) {
                 recommendationDiv.className = 'result low-value';
                 recommendationDiv.innerHTML = `
+                    <div class="annual-loss-banner">
+                        <div class="loss-label">🚨 YOU ARE LOSING</div>
+                        <div class="loss-amount">$${annualWaste.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+                        <div class="loss-period">PER YEAR</div>
+                    </div>
                     <strong>💡 Recommendation: DIY Solution</strong><br><br>
-                    Your annual waste is <strong>$${annualWaste.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong>, which may not justify a custom automation investment.<br><br>
+                    Your annual waste may not justify a custom automation investment.<br><br>
                     ${appCount <= 2 ? 'With only ' + appCount + ' apps involved, ' : ''}Consider using tools like:<br>
                     • ChatGPT for manual assistance<br>
                     • Zapier or Make.com for simple automation<br>
@@ -952,8 +1431,12 @@
             else {
                 recommendationDiv.className = 'result medium-value';
                 recommendationDiv.innerHTML = `
+                    <div class="annual-loss-banner">
+                        <div class="loss-label">🚨 YOU ARE LOSING</div>
+                        <div class="loss-amount">$${annualWaste.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+                        <div class="loss-period">PER YEAR</div>
+                    </div>
                     <strong>💼 Good Automation Candidate</strong><br><br>
-                    You are losing <strong>$${(annualWaste/12).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}/month</strong> ($${annualWaste.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} annually).<br><br>
                     ${appCount >= 3 ? 'With ' + appCount + ' apps involved, this requires professional integration.<br><br>' : ''}
                     ${requiresAI ? 'This task requires AI decision-making capabilities.<br><br>' : 'This could be automated with workflow tools or AI assistance.<br><br>'}
                     ${dataType === 'unstructured' ? 'Unstructured data adds complexity and value to automation.<br><br>' : ''}
@@ -966,12 +1449,27 @@
 
         function updateFormData() {
             // Update hidden fields with current data
+            const processBucket = document.getElementById('processBucket').value;
+            const processDescription = document.getElementById('processDescription').value;
+            const appList = document.getElementById('q6').value;
+
+            const q10 = document.querySelector('input[name="q10"]:checked');
+            const hasBudget = q10 ? q10.value : '';
+
+            const q11 = document.querySelector('input[name="q11"]:checked');
+            const budgetRange = q11 ? q11.value : '';
+
             const recommendationText = document.getElementById('recommendation').innerText;
             const monthlyWaste = document.getElementById('monthlyWaste').textContent;
             const annualWaste = document.getElementById('annualWaste').textContent;
             const complexityScore = document.getElementById('complexityScore').textContent;
             const readinessScore = document.getElementById('readinessScore').textContent;
 
+            document.getElementById('processBucketData').value = processBucket;
+            document.getElementById('processDescriptionData').value = processDescription;
+            document.getElementById('appListData').value = appList;
+            document.getElementById('hasBudgetData').value = hasBudget;
+            document.getElementById('budgetRangeData').value = budgetRange;
             document.getElementById('recommendationData').value = recommendationText;
             document.getElementById('monthlyWasteData').value = monthlyWaste;
             document.getElementById('annualWasteData').value = annualWaste;

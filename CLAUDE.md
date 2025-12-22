@@ -24,30 +24,49 @@ When making changes:
 ## Architecture
 
 ### Single-File Application
-The entire application is contained in `index.html` (697 lines):
-- **Lines 1-292**: CSS styling with gradient themes, responsive cards, and print styles
-- **Lines 293-518**: HTML structure with tab navigation and form inputs
-- **Lines 520-695**: JavaScript for calculations, tab switching, and dynamic recommendations
+The entire application is contained in `index.html` (1102 lines):
+- **Lines 1-547**: CSS styling with gradient themes, responsive cards, print styles, and mobile responsive design
+- **Lines 548-858**: HTML structure with single-page scrolling navigation and form inputs
+- **Lines 860-1098**: JavaScript for calculations, form submission, and dynamic recommendations
+- **Lines 1100**: Scroll-to-top button element
 
 ### Key Components
 
-**Tab System** (lines 301-306):
-- Dashboard: Real-time visualization of calculated metrics
-- Section 1 (Cost Analysis): Q1-Q4 for ROI calculation
-- Section 2 (Complexity): Q5-Q7 for technical assessment
-- Section 3 (Readiness): Q8-Q9 for implementation readiness
+**Navigation System** (lines 558-563):
+- Single-page scrolling design with smooth anchor link navigation
+- Sticky navigation bar (lines 58-82)
+- ROI Calculator: Q1-Q4 for cost analysis
+- Complexity: Q5-Q7 for technical assessment
+- Readiness: Q8-Q9 for implementation readiness
+- Score: Dashboard with real-time visualization of calculated metrics
 
-**Core Calculation Logic** (lines 539-638):
+**Header & Branding** (lines 551-556):
+- Logo image reference from ai-agent-services.com
+- Branded header with company link
+- Favicon integration (line 7)
+
+**Core Calculation Logic** (lines 861-964):
 - `calculate()`: Main function triggered on all input changes via `oninput="calculate()"`
-- Monthly waste formula: `(Q1 × Q2 / 60) × Q3 + Q4`
-- Annual waste: `monthlyWaste × 12`
-- Complexity scoring based on app count, AI requirement, and data type
-- Readiness scoring based on documentation and authorization status
+- Monthly waste formula: `(Q1 × Q2 / 60) × Q3 + Q4` (line 869)
+- Annual waste: `monthlyWaste × 12` (line 870)
+- App count detection from textarea using comma/newline split (lines 878-896)
+- Complexity scoring based on app count, AI requirement, and data type (lines 929-943)
+- Readiness scoring based on documentation and authorization status (lines 945-957)
 
-**Recommendation Engine** (lines 640-689):
-- **Perfect Lead**: Annual waste ≥ $40k + requires AI → "Book Strategy Call"
-- **Low Value**: Annual waste < $10k → "DIY with ChatGPT/Zapier"
-- **Medium Value**: $10k-$40k → Custom recommendation based on complexity
+**Recommendation Engine** (lines 966-1015):
+- **Perfect Lead**: Annual waste ≥ $40k + requires AI → "Book Strategy Call" (lines 977-987)
+- **Low Value**: Annual waste < $10k → "DIY with ChatGPT/Zapier" (lines 989-1000)
+- **Medium Value**: $10k-$40k → Custom recommendation based on complexity (lines 1002-1014)
+
+**Form Submission** (lines 1036-1078):
+- Webhook endpoint: `https://n8n.dataflow-labs.de/webhook/36841c3f-a6fc-4187-9171-09023bb74602`
+- POST request with JSON payload containing user info and calculated results
+- Includes loading state and error handling
+
+**Scroll-to-Top Button** (lines 1080-1096):
+- Appears after scrolling 300px down
+- Smooth scroll behavior to top of page
+- Positioned fixed at bottom-right corner
 
 ### Question Logic
 
@@ -100,18 +119,52 @@ docker rmi ai-readiness-audit
 - Documentation: `instructions.md` (strategic design document)
 - README: `README.md` (user-facing quick start)
 - Dockerfile: Uses nginx:alpine to serve the HTML file
+- Logo: `assets/Logo_Favicon.png` (local logo file)
+- Favicon: Remote URL from ai-agent-services.com
+
+## New Features (vs Original Version)
+
+### Form Submission with Webhook Integration
+- Lead capture form at the bottom of the dashboard (lines 824-855)
+- Collects: First Name, Last Name, Company Name, Email
+- Hidden fields automatically populated with calculated results
+- Webhook endpoint: `https://n8n.dataflow-labs.de/webhook/36841c3f-a6fc-4187-9171-09023bb74602`
+- Full error handling and loading states
+
+### Single-Page Scrolling Design
+- Changed from tab-based navigation to smooth-scrolling anchor links
+- Sticky navigation bar that follows user while scrolling
+- All sections visible on one page for better UX
+- Scroll-to-top button for easy navigation back to top
+
+### Enhanced Mobile Responsiveness
+- Three-tier responsive design (desktop, tablet/mobile, small mobile)
+- Navigation collapses to 2-column grid on tablets, full-width on mobile
+- Dashboard cards stack vertically on mobile devices
+- Font sizes and padding optimized for small screens
+
+### Branding Integration
+- Company logo and branding from AI Agent Services
+- Teal-to-blue color scheme (#1FC7C7 → #2B7FE8) replacing previous purple theme
+- Favicon integration
+- Header includes link to ai-agent-services.com
 
 ## Key Implementation Details
 
 ### Real-time Updates
-All form inputs trigger `calculate()` via `oninput` or `onchange` attributes, providing instant feedback on the dashboard.
+All form inputs trigger `calculate()` via `oninput` or `onchange` attributes, providing instant feedback on the dashboard. Smooth scroll behavior enabled site-wide (line 54-56).
 
 ### Dashboard Cards
-Four main metrics displayed (lines 316-337):
+Four main metrics displayed (lines 776-797):
 - Monthly Waste
 - Annual Waste
 - Complexity Score (Low/Medium/High/Expert)
 - Readiness Level (✓ Ready / ⚠️ Partial / ✗ Not Ready)
+
+Additional complexity breakdown (lines 799-815):
+- Apps Involved indicator
+- AI Required indicator (🤖 or ✓)
+- Data Type indicator (📄 or 📊)
 
 ### Number Formatting
 The application uses JavaScript's regex-based thousand separators:
@@ -123,30 +176,40 @@ The application uses JavaScript's regex-based thousand separators:
 Number inputs have spinner arrows disabled via CSS (lines 139-148) for cleaner UI.
 
 ### Print Functionality
-CSS includes `@media print` rules (lines 283-291) to show all sections when printing.
+CSS includes `@media print` rules (lines 403-414) to show all sections when printing and hide navigation elements.
 
 ## Modifying the Application
 
 ### Changing Thresholds
-Key thresholds in `generateRecommendation()` function (line 640):
-- Low value threshold: `annualWaste < 10000` (line 663)
-- Perfect lead threshold: `annualWaste >= 40000 && requiresAI` (line 651)
-- Medium value threshold: Between $10k-$40k
+Key thresholds in `generateRecommendation()` function (line 966):
+- Low value threshold: `annualWaste < 10000` (line 989)
+- Perfect lead threshold: `annualWaste >= 40000 && requiresAI` (line 977)
+- Medium value threshold: Between $10k-$40k (line 1002)
 
 ### Styling
-Primary gradient colors defined multiple times:
-- Main gradient: `#667eea` to `#764ba2`
-- Modify at lines 16, 31, 89, 185 for consistent theme changes
+Primary gradient colors (teal to blue theme):
+- Main gradient: `linear-gradient(135deg, #1FC7C7 0%, #2B7FE8 100%)`
+- Applied to: body background (line 17), header (line 32), section headers (line 94), dashboard cards (line 190), submit button (line 348), scroll-to-top button (line 377)
+- Border accent color: `#2B7FE8` used throughout for focus states and borders
+
+### Responsive Design
+Three breakpoints for mobile optimization:
+- **768px and below** (lines 416-523): Tablet/mobile layout adjustments
+- **480px and below** (lines 525-546): Small mobile device optimization
+- Features: Collapsible navigation, stacked grid layouts, adjusted font sizes
 
 ### Formula Adjustments
-Monthly waste calculation is at line 547:
+Monthly waste calculation is at line 869:
 ```javascript
 const monthlyWaste = (q1 * q2 / 60) * q3 + q4;
 ```
 
 ## Known Quirks
 
-1. Q4 (cost of error) is added directly to monthly waste rather than multiplied by error rate - it's treated as a monthly expected cost
-2. App count is text-parsed by splitting on commas - no validation for empty entries or whitespace
-3. All calculations use `parseFloat() || 0` for safe handling of empty inputs
-4. Radio buttons don't have a "reset" option - once selected, user must choose one of the options
+1. **DUPLICATE SECTION 1**: Lines 566-614 and 615-663 contain duplicate ROI Calculator sections. The first instance (lines 566-614) appears to be incomplete/orphaned. This should be removed in the next update.
+2. Q4 (cost of error) is added directly to monthly waste rather than multiplied by error rate - it's treated as a monthly expected cost
+3. App count is text-parsed by splitting on commas and newlines (`q5.split(/[,\n]/)`) - no validation for empty entries or whitespace (line 880)
+4. All calculations use `parseFloat() || 0` for safe handling of empty inputs
+5. Radio buttons don't have a "reset" option - once selected, user must choose one of the options
+6. Form data includes hidden fields that are updated in real-time via `updateFormData()` function (lines 1017-1030)
+7. The logo image is loaded from a local path (`assets/Logo_Favicon.png`) while the favicon loads from the remote URL
