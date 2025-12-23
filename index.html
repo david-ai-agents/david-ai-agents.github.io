@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Readiness Audit - Interactive Spreadsheet</title>
     <link rel="icon" href="https://ai-agent-services.com/wp-content/uploads/2025/09/cropped-Logo_Favicon-32x32.png" sizes="32x32">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,10 +16,14 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1FC7C7 0%, #2B7FE8 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f4f5f4;
             min-height: 100vh;
             padding: 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         .container {
@@ -29,10 +36,11 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #1FC7C7 0%, #2B7FE8 100%);
-            color: white;
+            background-color: #f4f5f4;
+            color: #333;
             padding: 30px;
             text-align: center;
+            border: none;
         }
 
         .header .logo {
@@ -44,29 +52,31 @@
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
+            color: #333;
         }
 
         .header h2 {
             font-size: 1.3em;
             margin-bottom: 15px;
             font-weight: 500;
+            color: #333;
         }
 
         .header h2 a {
-            color: white;
+            color: #2B7FE8;
             text-decoration: none;
             font-weight: 700;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            border-bottom: 2px solid rgba(43, 127, 232, 0.3);
             transition: border-color 0.3s;
         }
 
         .header h2 a:hover {
-            border-bottom-color: white;
+            border-bottom-color: #2B7FE8;
         }
 
         .header p {
             font-size: 1.2em;
-            opacity: 0.9;
+            color: #555;
         }
 
         html {
@@ -173,7 +183,7 @@
             border: 2px solid #ddd;
             border-radius: 6px;
             transition: border-color 0.3s;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         select {
@@ -357,6 +367,10 @@
             gap: 8px;
         }
 
+        .radio-option label {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
         .radio-option input[type="radio"] {
             width: auto;
         }
@@ -457,16 +471,6 @@
             margin-bottom: 10px;
         }
 
-        .video-placeholder {
-            background: #f0f0f0;
-            padding: 60px;
-            text-align: center;
-            border-radius: 8px;
-            margin: 30px 0;
-            border: 2px dashed #ccc;
-            color: #999;
-        }
-
         .submit-form {
             display: flex;
             flex-direction: column;
@@ -489,6 +493,7 @@
             color: #333;
             margin-bottom: 8px;
             font-size: 0.95em;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         .form-group input[type="text"],
@@ -499,6 +504,7 @@
             border: 2px solid #ddd;
             border-radius: 6px;
             transition: border-color 0.3s;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         .form-group input[type="text"]:focus,
@@ -513,6 +519,7 @@
             padding: 15px 40px;
             font-size: 1.1em;
             font-weight: bold;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -574,6 +581,111 @@
             .scroll-to-top {
                 display: none;
             }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: slideUp 0.3s ease-out;
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content.success {
+            border-top: 5px solid #28a745;
+        }
+
+        .modal-content.error {
+            border-top: 5px solid #dc3545;
+        }
+
+        .modal-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .modal-content.success .modal-icon {
+            color: #28a745;
+        }
+
+        .modal-content.error .modal-icon {
+            color: #dc3545;
+        }
+
+        .modal-title {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .modal-message {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .modal-email {
+            background: #f4f5f4;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-weight: 600;
+            color: #2B7FE8;
+        }
+
+        .modal-button {
+            background: linear-gradient(135deg, #1FC7C7 0%, #2B7FE8 100%);
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
 
         @media (max-width: 768px) {
@@ -680,6 +792,23 @@
                 width: 100%;
             }
 
+            .modal-content {
+                padding: 30px 20px;
+                width: 95%;
+            }
+
+            .modal-title {
+                font-size: 1.5em;
+            }
+
+            .modal-message {
+                font-size: 1em;
+            }
+
+            .modal-icon {
+                font-size: 3em;
+            }
+
             .scroll-to-top {
                 width: 45px;
                 height: 45px;
@@ -706,11 +835,6 @@
 
             .bucket-card h4 {
                 font-size: 1.15em;
-            }
-
-            .video-placeholder {
-                padding: 40px 20px;
-                font-size: 0.9em;
             }
 
             .result-display {
@@ -797,11 +921,6 @@
                 font-size: 1.1em;
             }
 
-            .video-placeholder {
-                padding: 30px 15px;
-                font-size: 0.85em;
-            }
-
             .result-display {
                 padding: 20px 15px;
             }
@@ -845,40 +964,18 @@
         </div>
 
         <nav class="nav">
-            <a href="#section1">💡 Why Free?</a>
-            <a href="#section2">🎯 Pick a Process</a>
-            <a href="#section3">💰 Cost Calculator</a>
-            <a href="#section4">⚙️ Complexity</a>
-            <a href="#section5">🚦 Readiness</a>
+            <a href="#pick-process">🎯 Pick a Process</a>
+            <a href="#cost-calculator">💰 Cost Calculator</a>
+            <a href="#complexity">⚙️ Complexity</a>
+            <a href="#readiness">🚦 Readiness</a>
             <a href="#dashboard">📊 Score</a>
         </nav>
 
         <div class="content">
-            <!-- Section 1: Why Free -->
-            <div id="section1" class="section">
+            <!-- Pick a Process -->
+            <div id="pick-process" class="section">
                 <div class="section-header">
-                    <h2>💡 Section 1: Why We Give You this Much Value For Free?!?!</h2>
-                    <p>Understanding our mission and how this audit helps you</p>
-                </div>
-
-                <div class="explanatory-content">
-                    <p>Welcome to your AI Readiness audit. Over the years, we've helped Scale-Ups and Enterprises make and save millions by utilizing AI + Automation. This audit was built because we can't have calls with every client that wants our help.</p>
-
-                    <h3>This will give you a great starting point to determine:</h3>
-                    <ul>
-                        <li><strong>How much money you're losing</strong> with your current business processes.</li>
-                        <li><strong>If you can fix it on your own</strong> or if you should pull in an expert.</li>
-                        <li><strong>What you need to do</strong> before implementation.</li>
-                    </ul>
-
-                    <h3>Why is this free?</h3>
-                    <p>Every business can benefit from AI + Automation, but we only work with companies that have a <strong>$20,000+ budget</strong> to invest. We still want everyone to get the benefit of knowing what to do. This helps smaller companies solve simple challenges on their own, and companies with budget and complex problems learn where to start.</p>
-                </div>
-            </div>
-            <!-- Section 2: Pick a Process -->
-            <div id="section2" class="section">
-                <div class="section-header">
-                    <h2>🎯 Section 2: Pick a Business Process to Transform</h2>
+                    <h2>🎯 Pick a Business Process to Transform</h2>
                     <p>Identify the right process for maximum impact</p>
                 </div>
 
@@ -907,10 +1004,6 @@
                         <p><strong>Ask yourself:</strong> "Where do we constantly have to double-check work or fix mistakes after the fact?"</p>
                         <p><strong>Look for:</strong> Contract review, compliance checks, transferring data between systems, or quality assurance inspections.</p>
                     </div>
-
-                    <div class="video-placeholder">
-                        📹 Video Placeholder - Explanatory video about choosing the right process
-                    </div>
                 </div>
 
                 <div class="question-block">
@@ -930,10 +1023,10 @@
                 </div>
             </div>
 
-            <!-- Section 3: Cost Calculator -->
-            <div id="section3" class="section">
+            <!-- Cost Calculator -->
+            <div id="cost-calculator" class="section">
                 <div class="section-header">
-                    <h2>💰 Section 3: Cost Calculator</h2>
+                    <h2>💰 Cost Calculator</h2>
                     <p>Calculate the financial impact of your current process</p>
                 </div>
 
@@ -980,10 +1073,10 @@
                 </div>
             </div>
 
-            <!-- Section 4: Complexity -->
-            <div id="section4" class="section">
+            <!-- Complexity -->
+            <div id="complexity" class="section">
                 <div class="section-header">
-                    <h2>⚙️ Section 4: Complexity</h2>
+                    <h2>⚙️ Complexity</h2>
                     <p>Check how complex the process is</p>
                 </div>
 
@@ -1056,10 +1149,10 @@
                 </div>
             </div>
 
-            <!-- Section 5: Readiness -->
-            <div id="section5" class="section">
+            <!-- Readiness -->
+            <div id="readiness" class="section">
                 <div class="section-header">
-                    <h2>🚦 Section 5: Readiness</h2>
+                    <h2>🚦 Readiness</h2>
                     <p>How fast can you start the project</p>
                 </div>
 
@@ -1393,7 +1486,7 @@
             }
 
             // Perfect Lead (High Value + Complex)
-            if (annualWaste >= 40000 && requiresAI) {
+            if (annualWaste >= 20000 && requiresAI) {
                 recommendationDiv.className = 'result perfect-lead';
                 recommendationDiv.innerHTML = `
                     <div class="annual-loss-banner">
@@ -1405,7 +1498,7 @@
                     This task requires decision-making and AI capabilities, which makes it a high-value automation opportunity.<br><br>
                     ${!hasDocumentation ? '<strong>⚠️ Action Required:</strong> You need a "Discovery & Mapping Workshop" ($2k-$5k) before building the agent.<br><br>' : ''}
                     ${!hasAuthorization ? '<strong>⚠️ Warning:</strong> IT approval required may slow implementation.<br><br>' : ''}
-                    <strong>Next Step:</strong> Book your Strategy Call to discuss implementing an AI Agent solution.
+                    <strong>Next Step:</strong> Submit this audit below and book your Strategy Call directly at <a href="https://book.ai-agent-services.com" target="_blank" style="color: #2B7FE8; text-decoration: underline;">book.ai-agent-services.com</a> to discuss implementing an AI Agent solution.
                 `;
             }
             // Low Value
@@ -1423,7 +1516,7 @@
                     • ChatGPT for manual assistance<br>
                     • Zapier or Make.com for simple automation<br>
                     • Internal process optimization<br><br>
-                    A custom AI agent solution typically makes sense for $40k+ annual waste.
+                    A custom AI agent solution typically makes sense for $20k+ annual waste.
                 `;
             }
             // Medium Value
@@ -1439,9 +1532,9 @@
                     ${appCount >= 3 ? 'With ' + appCount + ' software involved, this requires professional integration.<br><br>' : ''}
                     ${requiresAI ? 'This task requires AI decision-making capabilities.<br><br>' : 'This could be automated with workflow tools or AI assistance.<br><br>'}
                     ${dataType === 'unstructured' ? 'Unstructured data adds complexity and value to automation.<br><br>' : ''}
-                    ${!hasDocumentation ? '<strong>⚠️ Next Step:</strong> Consider a "Discovery & Mapping Workshop" to document your process.<br><br>' : ''}
+                    ${!hasDocumentation ? '<strong>⚠️ Action Required:</strong> Consider a "Discovery & Mapping Workshop" to document your process.<br><br>' : ''}
                     ${!hasAuthorization ? '<strong>⚠️ Note:</strong> You\'ll need IT/budget approval before proceeding.<br><br>' : ''}
-                    <strong>Recommendation:</strong> ${annualWaste >= 25000 ? 'Schedule a consultation to discuss custom automation.' : 'Consider professional automation tools or a small-scale pilot project.'}
+                    <strong>Next Step:</strong> ${annualWaste >= 20000 ? 'Submit this audit below and book a Strategy Call at <a href="https://book.ai-agent-services.com" target="_blank" style="color: #2B7FE8; text-decoration: underline;">book.ai-agent-services.com</a> to discuss custom automation.' : 'Submit this audit below and consider booking a call at <a href="https://book.ai-agent-services.com" target="_blank" style="color: #2B7FE8; text-decoration: underline;">book.ai-agent-services.com</a> to explore professional automation tools or a small-scale pilot project.'}
                 `;
             }
         }
@@ -1510,12 +1603,20 @@
                 })
                 .then(data => {
                     console.log('Success:', data);
-                    alert('Thank you! Your results have been submitted successfully.');
+                    showModal(
+                        'success',
+                        'Thank You!',
+                        'Your results have been submitted successfully.<div class="modal-email">Questions? Reach out at team@ai-agent-services.com</div>We\'ll review your audit and get back to you soon!'
+                    );
                     form.reset();
                 })
                 .catch((error) => {
                     console.error('Error:', error);
-                    alert('There was an error submitting your results. Please try again.');
+                    showModal(
+                        'error',
+                        'Submission Failed',
+                        'There was an error submitting your results. Please try again or contact us at <div class="modal-email">team@ai-agent-services.com</div>'
+                    );
                 })
                 .finally(() => {
                     // Re-enable submit button
@@ -1523,6 +1624,46 @@
                     submitButton.textContent = 'Submit Results';
                 });
             });
+
+            // Modal Functions
+            function showModal(type, title, message) {
+                const modal = document.getElementById('modal');
+                const modalContent = document.getElementById('modalContent');
+                const modalIcon = document.getElementById('modalIcon');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalMessage = document.getElementById('modalMessage');
+
+                // Set content based on type
+                if (type === 'success') {
+                    modalContent.className = 'modal-content success';
+                    modalIcon.textContent = '✓';
+                    modalTitle.textContent = title;
+                    modalMessage.innerHTML = message;
+                } else if (type === 'error') {
+                    modalContent.className = 'modal-content error';
+                    modalIcon.textContent = '✕';
+                    modalTitle.textContent = title;
+                    modalMessage.innerHTML = message;
+                }
+
+                // Show modal
+                modal.classList.add('show');
+            }
+
+            function closeModal() {
+                const modal = document.getElementById('modal');
+                modal.classList.remove('show');
+            }
+
+            // Close modal when clicking outside
+            document.getElementById('modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+
+            // Close modal with button
+            document.getElementById('modalButton').addEventListener('click', closeModal);
 
             // Scroll to top functionality
             const scrollToTopBtn = document.getElementById('scrollToTop');
@@ -1545,5 +1686,15 @@
     </script>
 
     <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">↑</button>
+
+    <!-- Modal -->
+    <div id="modal" class="modal-overlay">
+        <div id="modalContent" class="modal-content">
+            <div id="modalIcon" class="modal-icon"></div>
+            <h2 id="modalTitle" class="modal-title"></h2>
+            <div id="modalMessage" class="modal-message"></div>
+            <button id="modalButton" class="modal-button">Close</button>
+        </div>
+    </div>
 </body>
 </html>
