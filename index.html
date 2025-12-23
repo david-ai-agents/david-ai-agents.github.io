@@ -883,7 +883,6 @@
                 </div>
 
                 <div class="explanatory-content">
-                    <h4>INSTRUCTION 1</h4>
                     <p>Most executives we speak with have a few things in mind when we ask them - <strong>what process is currently costing you the most money?</strong></p>
 
                     <p>Don't try to "fix everything." Instead, look for one process that fits into one of the three buckets below.</p>
@@ -942,7 +941,7 @@
                     <h3>Q1. Task Frequency & Volume</h3>
                     <p class="question-text">How many times per month is this specific process performed across the entire company?</p>
                     <div class="why-matters">
-                        <strong>Why this matters:</strong> Automation thrives on volume. Low volume = low ROI. High volume = high ROI.
+                        <strong>Why this matters:</strong> Automation thrives on volume. Low volume = Low ROI (Return on Investment). High volume = high ROI.
                     </div>
                     <input type="number" id="q1" placeholder="e.g., 500" oninput="calculate()">
                 </div>
@@ -993,7 +992,7 @@
                     <div class="radio-group">
                         <div class="radio-option">
                             <input type="radio" id="q5complex" name="q5" value="complex" onchange="calculate()">
-                            <label for="q5complex">The system and setup is very complex</label>
+                            <label for="q5complex">The system and process is very complex</label>
                         </div>
                         <div class="radio-option">
                             <input type="radio" id="q5manageable" name="q5" value="manageable" onchange="calculate()">
@@ -1019,8 +1018,8 @@
                 </div>
 
                 <div class="question-block">
-                    <h3>Q7. Cognitive Load (The AI Trigger)</h3>
-                    <p class="question-text">Does this task require reading unstructured text (emails, PDFs) and making a decision/judgment?</p>
+                    <h3>Q7. More than just a Copy-Paste Task?</h3>
+                    <p class="question-text">Does this task require higher-level skills that aren’t simple copy and paste? For example categorizing, replying, and syncing data from unstructured text (e.g., emails, PDF Invoices, call transcripts) and making decisions/judgement?</p>
                     <div class="why-matters">
                         <strong>Qualification:</strong><br>
                         • Yes - Requires AI/Decision Making<br>
@@ -1040,18 +1039,18 @@
 
                 <div class="question-block">
                     <h3>Q8. Data Stability</h3>
-                    <p class="question-text">Is the data for this process structured (databases/Excel) or unstructured (emails/phone calls/PDFs)?</p>
+                    <p class="question-text">Is the data for this process unstructured (emails/phone calls/PDFs) or structured (databases/tables/API)</p>
                     <div class="why-matters">
                         <strong>Why this matters:</strong> Unstructured data is the hardest problem to solve.
                     </div>
                     <div class="radio-group">
                         <div class="radio-option">
                             <input type="radio" id="q8unstructured" name="q8" value="unstructured" onchange="calculate()">
-                            <label for="q8unstructured">Unstructured (emails, PDFs, calls)</label>
+                            <label for="q8unstructured">Unstructured (emails/phone calls/PDFs)</label>
                         </div>
                         <div class="radio-option">
                             <input type="radio" id="q8structured" name="q8" value="structured" onchange="calculate()">
-                            <label for="q8structured">Structured (databases, Excel)</label>
+                            <label for="q8structured">Structured (databases/tables/API)</label>
                         </div>
                     </div>
                 </div>
