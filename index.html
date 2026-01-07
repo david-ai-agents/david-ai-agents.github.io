@@ -419,16 +419,21 @@
         }
 
         .video-container {
-            margin: 30px 0;
-            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 560px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+            padding: 8px;
         }
 
         .video-container video {
             width: 100%;
             height: auto;
             display: block;
+            border-radius: 6px;
         }
 
         .explanatory-content {
@@ -828,6 +833,11 @@
                 bottom: 20px;
                 right: 20px;
                 font-size: 20px;
+            }
+
+            .video-container {
+                margin: 20px 0;
+                max-width: 100%;
             }
 
             .explanatory-content {
